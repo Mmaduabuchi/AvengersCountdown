@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avengers: Final Dawn - Official Countdown</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Orbitron', 'sans-serif'],
+                    },
+                    colors: {
+                        marvel: {
+                            red: '#E23636',
+                            dark: '#0B0C10',
+                            blue: '#1F2833',
+                            light: '#C5C6C7',
+                            neon: '#66FCF1',
+                            gold: '#F0A500'
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        glow: {
+                            'from': { textShadow: '0 0 10px #E23636, 0 0 20px #E23636' },
+                            'to': { textShadow: '0 0 20px #ff4da6, 0 0 30px #ff4da6' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Utilities */
+        body {
+            background-color: #050505;
+            overflow-x: hidden;
+        }
+
+        /* Cinematic Gradient Overlay */
+        .cinematic-vignette {
+            background: radial-gradient(circle, transparent 20%, #000000 120%);
+            pointer-events: none;
+        }
+
+        /* Text Stroke for Headers */
+        .text-stroke {
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
+        }
+
+        /* Glassmorphism */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Reveal Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Glitch Effect on Title Hover */
+        .glitch-hover:hover {
+            animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
+            color: #E23636;
+        }
+        @keyframes glitch {
+            0% { transform: translate(0) }
+            20% { transform: translate(-2px, 2px) }
+            40% { transform: translate(-2px, -2px) }
+            60% { transform: translate(2px, 2px) }
+            80% { transform: translate(2px, -2px) }
+            100% { transform: translate(0) }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B0C10; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #E23636; 
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="text-gray-100 antialiased selection:bg-marvel-red selection:text-white">
+
+    <!-- Canvas Background -->
+    <canvas id="particle-canvas" class="fixed top-0 left-0 w-full h-full -z-10"></canvas>
+    
+    <!-- Vignette Overlay -->
+    <div class="fixed top-0 left-0 w-full h-full cinematic-vignette z-0"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 top-0 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0 cursor-pointer group">
+                    <span class="font-display font-black text-2xl tracking-widest text-white group-hover:text-marvel-red transition-colors duration-300">AVENGERS</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#synopsis" class="text-sm uppercase tracking-widest hover:text-marvel-red transition-colors duration-300">Synopsis</a>
+                        <a href="#roster" class="text-sm uppercase tracking-widest hover:text-marvel-red transition-colors duration-300">Roster</a>
+                        <a href="#trailer" class="px-6 py-2 border border-marvel-red text-marvel-red hover:bg-marvel-red hover:text-white transition-all duration-300 text-sm uppercase tracking-widest font-bold">Watch Trailer</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center z-10 px-4 pt-20">
+        <div class="text-center w-full max-w-5xl">
+            <p class="text-marvel-red text-sm md:text-lg font-display tracking-[0.5em] mb-4 opacity-0 animate-fade-in-up" style="animation-delay: 0.5s; animation-fill-mode: forwards;">
+                THE END IS NEAR
+            </p>
+            
+            <h1 class="font-display font-black text-6xl md:text-8xl lg:text-9xl tracking-tighter mb-2 leading-none glitch-hover cursor-default opacity-0 animate-fade-in-up" style="animation-delay: 0.8s; animation-fill-mode: forwards;">
+                FINAL <span class="text-transparent bg-clip-text bg-gradient-to-r from-marvel-red to-orange-600">DAWN</span>
+            </h1>
+            
+            <p class="text-gray-400 max-w-2xl mx-auto text-lg md:text-xl mb-12 font-light opacity-0 animate-fade-in-up" style="animation-delay: 1.1s; animation-fill-mode: forwards;">
+                Witness the culmination of the saga. Sacrifices will be made. Legends will fall.
+            </p>
+
+            <!-- Countdown Timer -->
+            <div id="countdown" class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 max-w-4xl mx-auto mb-16 opacity-0 animate-fade-in-up" style="animation-delay: 1.4s; animation-fill-mode: forwards;">
+                <!-- Days -->
+                <div class="glass-panel p-4 md:p-6 rounded-lg group hover:border-marvel-red/50 transition-colors duration-300">
+                    <span id="days" class="block font-display text-4xl md:text-6xl font-bold text-white mb-2 group-hover:text-marvel-red transition-colors">00</span>
+                    <span class="text-xs md:text-sm uppercase tracking-widest text-gray-500">Days</span>
+                </div>
+                <!-- Hours -->
+                <div class="glass-panel p-4 md:p-6 rounded-lg group hover:border-marvel-red/50 transition-colors duration-300">
+                    <span id="hours" class="block font-display text-4xl md:text-6xl font-bold text-white mb-2 group-hover:text-marvel-red transition-colors">00</span>
+                    <span class="text-xs md:text-sm uppercase tracking-widest text-gray-500">Hours</span>
+                </div>
+                <!-- Minutes -->
+                <div class="glass-panel p-4 md:p-6 rounded-lg group hover:border-marvel-red/50 transition-colors duration-300">
+                    <span id="minutes" class="block font-display text-4xl md:text-6xl font-bold text-white mb-2 group-hover:text-marvel-red transition-colors">00</span>
+                    <span class="text-xs md:text-sm uppercase tracking-widest text-gray-500">Minutes</span>
+                </div>
+                <!-- Seconds -->
+                <div class="glass-panel p-4 md:p-6 rounded-lg group hover:border-marvel-red/50 transition-colors duration-300 relative overflow-hidden">
+                    <div class="absolute inset-0 bg-marvel-red/5 animate-pulse"></div>
+                    <span id="seconds" class="block font-display text-4xl md:text-6xl font-bold text-white mb-2 relative z-10">00</span>
+                    <span class="text-xs md:text-sm uppercase tracking-widest text-gray-500 relative z-10">Seconds</span>
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row gap-4 justify-center opacity-0 animate-fade-in-up" style="animation-delay: 1.7s; animation-fill-mode: forwards;">
+                <button onclick="document.getElementById('trailer').scrollIntoView({behavior: 'smooth'})" class="px-8 py-4 bg-marvel-red text-white font-display font-bold tracking-widest uppercase hover:bg-red-700 hover:scale-105 transform transition-all shadow-[0_0_20px_rgba(226,54,54,0.5)]">
+                    Notify Me
+                </button>
+                <button onclick="openModal()" class="px-8 py-4 border border-white/20 text-white font-display font-bold tracking-widest uppercase hover:bg-white/10 hover:border-white transform transition-all backdrop-blur-sm">
+                    Pre-Order Tickets
+                </button>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <i data-lucide="chevron-down" class="w-8 h-8 text-gray-500"></i>
+        </div>
+    </section>
+
+    <!-- Synopsis Section -->
+    <section id="synopsis" class="relative py-32 z-10 bg-black/50 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                <div class="reveal">
+                    <div class="w-full h-[500px] bg-gradient-to-br from-gray-900 to-gray-800 rounded-lg relative overflow-hidden group border border-gray-800">
+                        <!-- Abstract "Movie Poster" placeholder using gradients -->
+                        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1635863138275-d9b33299680b?q=80&w=3131&auto=format&fit=crop')] bg-cover bg-center opacity-60 group-hover:scale-110 transition-transform duration-700"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+                        <div class="absolute bottom-6 left-6 border-l-4 border-marvel-red pl-4">
+                            <p class="text-gray-400 font-display text-sm tracking-widest uppercase">Official Poster</p>
+                            <p class="text-white font-display font-bold text-2xl">THE UNIVERSE AT STAKE</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="reveal">
+                    <h2 class="font-display font-bold text-4xl md:text-5xl mb-6 text-white">THE FINAL STAND</h2>
+                    <div class="h-1 w-20 bg-marvel-red mb-8"></div>
+                    <p class="text-gray-300 text-lg leading-relaxed mb-6">
+                        Following the devastation of the Infinity War, the remaining Avengers must gather their strength for one last stand against an ancient cosmic threat that predates the stars themselves.
+                    </p>
+                    <p class="text-gray-300 text-lg leading-relaxed mb-8">
+                        With alliances fractured and hope dwindling, Earth's mightiest heroes will journey to the edge of existence. The cost of victory has never been higher.
+                    </p>
+                    <div class="flex items-center space-x-4">
+                        <div class="flex -space-x-4">
+                            <!-- Fake Avatars -->
+                            <div class="w-10 h-10 rounded-full border-2 border-black bg-blue-500"></div>
+                            <div class="w-10 h-10 rounded-full border-2 border-black bg-red-500"></div>
+                            <div class="w-10 h-10 rounded-full border-2 border-black bg-green-500"></div>
+                        </div>
+                        <span class="text-sm text-gray-400 font-display tracking-wide">STARRING THE ORIGINAL SIX</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roster / Character Highlights -->
+    <section id="roster" class="relative py-32 z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-20 reveal">
+                <h2 class="font-display font-bold text-4xl md:text-5xl text-white mb-4">ASSEMBLE</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">The galaxy's last line of defense.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1: Iron Leader -->
+                <div class="group relative h-96 rounded-xl overflow-hidden cursor-pointer reveal hover:shadow-[0_0_30px_rgba(234,179,8,0.3)] transition-all duration-500 border border-gray-800">
+                    <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black z-10"></div>
+                    <div class="absolute inset-0 bg-gradient-to-br from-yellow-900/40 to-red-900/40 opacity-50 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <!-- Icon Placeholder -->
+                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-yellow-500 opacity-20 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500">
+                        <i data-lucide="zap" class="w-24 h-24"></i>
+                    </div>
+                    <div class="absolute bottom-0 left-0 p-8 z-20 w-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                        <h3 class="font-display font-bold text-2xl text-white mb-1">ARMORED GENIUS</h3>
+                        <p class="text-yellow-500 text-sm font-bold tracking-widest uppercase mb-4">Tech Class</p>
+                        <p class="text-gray-400 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">Whatever it takes. The suit is ready for one final protocol.</p>
+                    </div>
+                </div>
+
+                <!-- Card 2: The Captain -->
+                <div class="group relative h-96 rounded-xl overflow-hidden cursor-pointer reveal hover:shadow-[0_0_30px_rgba(59,130,246,0.3)] transition-all duration-500 border border-gray-800">
+                    <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black z-10"></div>
+                    <div class="absolute inset-0 bg-gradient-to-br from-blue-900/40 to-gray-900/40 opacity-50 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-blue-500 opacity-20 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500">
+                        <i data-lucide="shield" class="w-24 h-24"></i>
+                    </div>
+                    <div class="absolute bottom-0 left-0 p-8 z-20 w-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                        <h3 class="font-display font-bold text-2xl text-white mb-1">FIRST AVENGER</h3>
+                        <p class="text-blue-500 text-sm font-bold tracking-widest uppercase mb-4">Soldier Class</p>
+                        <p class="text-gray-400 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">I can do this all day. Leadership is not about power.</p>
+                    </div>
+                </div>
+
+                <!-- Card 3: The Spy -->
+                <div class="group relative h-96 rounded-xl overflow-hidden cursor-pointer reveal hover:shadow-[0_0_30px_rgba(226,54,54,0.3)] transition-all duration-500 border border-gray-800">
+                    <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black z-10"></div>
+                    <div class="absolute inset-0 bg-gradient-to-br from-red-900/40 to-black opacity-50 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-red-500 opacity-20 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500">
+                        <i data-lucide="target" class="w-24 h-24"></i>
+                    </div>
+                    <div class="absolute bottom-0 left-0 p-8 z-20 w-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                        <h3 class="font-display font-bold text-2xl text-white mb-1">MASTER ASSASSIN</h3>
+                        <p class="text-red-500 text-sm font-bold tracking-widest uppercase mb-4">Stealth Class</p>
+                        <p class="text-gray-400 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">Ledger dripping with red. It's time to wipe it clean.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trailer/CTA Section -->
+    <section id="trailer" class="relative py-32 z-10 flex items-center justify-center overflow-hidden">
+        <!-- Background Glow -->
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-gray-900 to-black opacity-90 z-0"></div>
+        <div class="absolute w-full h-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-marvel-red/20 via-black to-black z-0"></div>
+        
+        <div class="relative z-10 text-center max-w-4xl px-4 reveal">
+            <div class="inline-block p-4 rounded-full border border-marvel-red/30 bg-marvel-red/10 mb-8 animate-pulse">
+                <i data-lucide="play" class="w-8 h-8 text-marvel-red fill-current ml-1"></i>
+            </div>
+            
+            <h2 class="font-display font-black text-5xl md:text-7xl text-white mb-8 tracking-tighter">
+                TRAILER <span class="text-marvel-red">LIVE</span>
+            </h2>
+            
+            <p class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
+                See the first look at the end of the saga. Experience it in IMAX.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row justify-center gap-6">
+                <button onclick="openModal()" class="group relative px-8 py-4 bg-transparent overflow-hidden rounded-sm text-white shadow-2xl transition-all duration-300 hover:scale-105 border border-marvel-red">
+                    <span class="absolute top-0 left-0 w-full h-full bg-marvel-red/20 group-hover:bg-marvel-red/80 transition-all duration-500 transform -translate-x-full group-hover:translate-x-0"></span>
+                    <span class="relative font-display font-bold tracking-widest uppercase flex items-center justify-center">
+                        Watch Now <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative z-10 border-t border-gray-900 bg-black pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-1 md:col-span-2">
+                    <h3 class="font-display font-bold text-2xl text-white mb-4">AVENGERS: FINAL DAWN</h3>
+                    <p class="text-gray-500 max-w-sm">
+                        The official countdown site for the final installment of the infinity saga. Distributed by Marvel Studios.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-display font-bold text-lg text-white mb-4 uppercase tracking-wider">Explore</h4>
+                    <ul class="space-y-2 text-gray-500">
+                        <li><a href="#" class="hover:text-marvel-red transition-colors">Movies</a></li>
+                        <li><a href="#" class="hover:text-marvel-red transition-colors">Characters</a></li>
+                        <li><a href="#" class="hover:text-marvel-red transition-colors">Comics</a></li>
+                        <li><a href="#" class="hover:text-marvel-red transition-colors">TV Shows</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-display font-bold text-lg text-white mb-4 uppercase tracking-wider">Legal</h4>
+                    <ul class="space-y-2 text-gray-500">
+                        <li><a href="#" class="hover:text-marvel-red transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-marvel-red transition-colors">Terms of Use</a></li>
+                        <li><a href="#" class="hover:text-marvel-red transition-colors">Cookie Preferences</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-900 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-600 text-sm">© 2024 MARVEL. All Rights Reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <i data-lucide="facebook" class="w-5 h-5 text-gray-500 hover:text-white cursor-pointer transition-colors"></i>
+                    <i data-lucide="twitter" class="w-5 h-5 text-gray-500 hover:text-white cursor-pointer transition-colors"></i>
+                    <i data-lucide="instagram" class="w-5 h-5 text-gray-500 hover:text-white cursor-pointer transition-colors"></i>
+                    <i data-lucide="youtube" class="w-5 h-5 text-gray-500 hover:text-white cursor-pointer transition-colors"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal Form -->
+    <div id="signup-modal" class="fixed inset-0 z-[100] hidden overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <!-- Backdrop -->
+        <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 bg-black/90 transition-opacity backdrop-blur-sm" aria-hidden="true" onclick="closeModal()"></div>
+
+            <!-- Modal Panel -->
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+            <div class="relative inline-block align-bottom bg-gray-900 border border-marvel-red/30 rounded-lg text-left overflow-hidden shadow-[0_0_50px_rgba(226,54,54,0.2)] transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                <div class="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div class="sm:flex sm:items-start">
+                        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
+                            <h3 class="text-2xl leading-6 font-display font-bold text-white mb-2" id="modal-title">ACCESS RESTRICTED</h3>
+                            <div class="mt-2">
+                                <p class="text-sm text-gray-400 mb-6">Enter your credentials to unlock the exclusive premiere content.</p>
+                                <form onsubmit="event.preventDefault(); closeModal(); alert('Access Granted. Welcome, Agent.');">
+                                    <div class="space-y-4">
+                                        <div>
+                                            <label for="name" class="block text-xs font-bold text-marvel-red uppercase tracking-widest mb-1">Agent Name</label>
+                                            <input type="text" id="name" class="w-full bg-black/50 border border-gray-700 text-white px-4 py-2 focus:outline-none focus:border-marvel-red focus:ring-1 focus:ring-marvel-red transition-colors rounded-sm" placeholder="Tony Stark">
+                                        </div>
+                                        <div>
+                                            <label for="email" class="block text-xs font-bold text-marvel-red uppercase tracking-widest mb-1">Secure Email</label>
+                                            <input type="email" id="email" class="w-full bg-black/50 border border-gray-700 text-white px-4 py-2 focus:outline-none focus:border-marvel-red focus:ring-1 focus:ring-marvel-red transition-colors rounded-sm" placeholder="tony@starkindustries.com">
+                                        </div>
+                                        <div>
+                                            <label for="code" class="block text-xs font-bold text-marvel-red uppercase tracking-widest mb-1">Access Code</label>
+                                            <input type="text" id="code" class="w-full bg-black/50 border border-gray-700 text-white px-4 py-2 focus:outline-none focus:border-marvel-red focus:ring-1 focus:ring-marvel-red transition-colors rounded-sm" placeholder="A-V-E-N-G-E">
+                                        </div>
+                                        <button type="submit" class="w-full mt-6 px-8 py-3 bg-marvel-red text-white font-display font-bold tracking-widest uppercase hover:bg-red-700 transition-colors shadow-lg rounded-sm">
+                                            Verify Identity
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="absolute top-0 right-0 pt-4 pr-4">
+                    <button type="button" class="text-gray-400 hover:text-white focus:outline-none" onclick="closeModal()">
+                        <span class="sr-only">Close</span>
+                        <i data-lucide="x" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translate3d(0, 40px, 0);
+            }
+            to {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .animate-fade-in-up {
+            animation-name: fadeInUp;
+            animation-duration: 0.8s;
+            animation-fill-mode: both;
+        }
+    </style>
+
+    <!-- Interactions Script -->
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // --- 1. Countdown Timer Logic ---
+        function startCountdown() {
+            // Set date to 14 days from now for demo purposes
+            const targetDate = new Date();
+            targetDate.setDate(targetDate.getDate() + 14); 
+            targetDate.setHours(targetDate.getHours() + 12); // Add some hours/mins for realism
+
+            const daysEl = document.getElementById('days');
+            const hoursEl = document.getElementById('hours');
+            const minutesEl = document.getElementById('minutes');
+            const secondsEl = document.getElementById('seconds');
+
+            function updateTimer() {
+                const now = new Date().getTime();
+                const distance = targetDate - now;
+
+                if (distance < 0) {
+                    clearInterval(interval);
+                    document.getElementById('countdown').innerHTML = "<div class='text-4xl text-marvel-red font-display font-bold'>NOW IN THEATERS</div>";
+                    return;
+                }
+
+                // Calculations
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                // Helper to animate change
+                const updateWithAnimation = (el, value) => {
+                    const strVal = value.toString().padStart(2, '0');
+                    if (el.innerText !== strVal) {
+                        el.innerText = strVal;
+                        // Trigger tiny pulse
+                        el.classList.remove('text-marvel-red');
+                        void el.offsetWidth; // trigger reflow
+                        el.classList.add('text-marvel-red');
+                        setTimeout(() => el.classList.remove('text-marvel-red'), 200);
+                    }
+                };
+
+                updateWithAnimation(daysEl, days);
+                updateWithAnimation(hoursEl, hours);
+                updateWithAnimation(minutesEl, minutes);
+                updateWithAnimation(secondsEl, seconds);
+            }
+
+            const interval = setInterval(updateTimer, 1000);
+            updateTimer(); // run immediately
+        }
+
+        // --- 2. Scroll Reveal Animation (Intersection Observer) ---
+        function initScrollAnimations() {
+            const observerOptions = {
+                threshold: 0.15, // Trigger when 15% visible
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target); // Only animate once
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        }
+
+        // --- 3. Navbar Blur on Scroll ---
+        function initNavbarScroll() {
+            const nav = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    nav.classList.add('bg-black/80', 'backdrop-blur-md', 'border-b', 'border-gray-800');
+                } else {
+                    nav.classList.remove('bg-black/80', 'backdrop-blur-md', 'border-b', 'border-gray-800');
+                }
+            });
+        }
+
+        // --- 4. Cinematic Particle Background (Canvas) ---
+        function initParticles() {
+            const canvas = document.getElementById('particle-canvas');
+            const ctx = canvas.getContext('2d');
+            
+            let particles = [];
+            const particleCount = 70; // number of particles
+
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            class Particle {
+                constructor() {
+                    this.reset();
+                    // Start at random y positions initially
+                    this.y = Math.random() * canvas.height;
+                }
+
+                reset() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = canvas.height + Math.random() * 100;
+                    this.speed = Math.random() * 0.5 + 0.1;
+                    this.size = Math.random() * 2 + 0.5;
+                    this.opacity = Math.random() * 0.5 + 0.1;
+                    // Colors: Ash grey or subtle ember orange
+                    this.isEmber = Math.random() > 0.8; 
+                }
+
+                update() {
+                    this.y -= this.speed;
+                    this.opacity -= 0.002;
+
+                    // Horizontal drift
+                    this.x += Math.sin(this.y * 0.01) * 0.2;
+
+                    if (this.y < -10 || this.opacity <= 0) {
+                        this.reset();
+                    }
+                }
+
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    
+                    if (this.isEmber) {
+                        ctx.fillStyle = `rgba(226, 54, 54, ${this.opacity})`; // Red ember
+                        ctx.shadowBlur = 10;
+                        ctx.shadowColor = "rgba(226, 54, 54, 0.5)";
+                    } else {
+                        ctx.fillStyle = `rgba(150, 150, 150, ${this.opacity})`; // Ash/Dust
+                        ctx.shadowBlur = 0;
+                    }
+                    
+                    ctx.fill();
+                    ctx.shadowBlur = 0; // reset
+                }
+            }
+
+            // Create particle pool
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                particles.forEach(p => {
+                    p.update();
+                    p.draw();
+                });
+
+                requestAnimationFrame(animate);
+            }
+
+            animate();
+        }
+
+        // --- 5. Modal Logic ---
+        function openModal() {
+            document.getElementById('signup-modal').classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        function closeModal() {
+            document.getElementById('signup-modal').classList.add('hidden');
+        }
+
+        // --- Initialize All ---
+        document.addEventListener('DOMContentLoaded', () => {
+            startCountdown();
+            initScrollAnimations();
+            initNavbarScroll();
+            initParticles();
+        });
+
+    </script>
+</body>
+</html>
