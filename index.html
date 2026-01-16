@@ -399,7 +399,7 @@
                             <h3 class="text-2xl leading-6 font-display font-bold text-white mb-2" id="modal-title">ACCESS RESTRICTED</h3>
                             <div class="mt-2">
                                 <p class="text-sm text-gray-400 mb-6">Enter your credentials to unlock the exclusive premiere content.</p>
-                                <form onsubmit="event.preventDefault(); closeModal(); alert('Access Granted. Welcome, Agent.');">
+                                <form onsubmit="event.preventDefault();">
                                     <div class="space-y-4">
                                         <div>
                                             <label for="name" class="block text-xs font-bold text-marvel-red uppercase tracking-widest mb-1">Full Name</label>
@@ -415,8 +415,15 @@
                                         </div> -->
                                         <div class="space-y-2">
                                             <label class="block text-xs font-bold text-marvel-red uppercase tracking-widest">Wallet Address (USDT/ETH)</label>
-                                            <div class="bg-black/50 border border-gray-700 text-gray-300 px-4 py-2 rounded-sm text-xs font-mono break-all">
-                                                0x71C7656EC7ab88b098defB751B7401B5f6d8976F
+                                            <div class="relative bg-black/50 border border-gray-700 text-gray-300 px-4 py-2 rounded-sm text-xs font-mono break-all">
+                                                <span id="walletAddress">0x71C7656EC7ab88b098defB751B7401B5f6d8976F</span>
+                                                <!-- Copy Icon -->
+                                                <button id="copyBtn" class="absolute top-1/2 right-2 -translate-y-1/2 text-gray-400 hover:text-white transition" title="Copy">
+                                                    <!-- Simple SVG copy icon -->
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 6h6a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v6a2 2 0 002 2z" />
+                                                    </svg>
+                                                </button>
                                             </div>
                                             <p class="text-[10px] text-gray-500 italic">* A fee of $10 must be paid. Please submit the transaction receipt proof below.</p>
                                         </div>
@@ -444,6 +451,10 @@
         </div>
     </div>
 
+
+
+    <!-- SweetAlert2 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         @keyframes fadeInUp {
             from {
@@ -649,6 +660,36 @@
             initParticles();
         });
 
+        const copyBtn = document.getElementById("copyBtn");
+        const walletAddress = document.getElementById("walletAddress");
+
+        copyBtn.addEventListener("click", () => {
+            navigator.clipboard.writeText(walletAddress.textContent).then(() => {
+                // Show SweetAlert2 toast
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Wallet address copied!',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    timerProgressBar: true,
+                });
+            }).catch(err => {
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'error',
+                    title: 'Failed to copy!',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    timerProgressBar: true,
+                });
+                console.error("Failed to copy text: ", err);
+            });
+        });
     </script>
+
+
 </body>
 </html>
