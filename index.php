@@ -383,17 +383,29 @@
                                 <form onsubmit="event.preventDefault(); closeModal(); alert('Access Granted. Welcome, Agent.');">
                                     <div class="space-y-4">
                                         <div>
-                                            <label for="name" class="block text-xs font-bold text-marvel-red uppercase tracking-widest mb-1">Agent Name</label>
+                                            <label for="name" class="block text-xs font-bold text-marvel-red uppercase tracking-widest mb-1">Full Name</label>
                                             <input type="text" id="name" class="w-full bg-black/50 border border-gray-700 text-white px-4 py-2 focus:outline-none focus:border-marvel-red focus:ring-1 focus:ring-marvel-red transition-colors rounded-sm" placeholder="Tony Stark">
                                         </div>
                                         <div>
                                             <label for="email" class="block text-xs font-bold text-marvel-red uppercase tracking-widest mb-1">Secure Email</label>
-                                            <input type="email" id="email" class="w-full bg-black/50 border border-gray-700 text-white px-4 py-2 focus:outline-none focus:border-marvel-red focus:ring-1 focus:ring-marvel-red transition-colors rounded-sm" placeholder="tony@starkindustries.com">
+                                            <input type="email" id="email" class="w-full bg-black/50 border border-gray-700 text-white px-4 py-2 focus:outline-none focus:border-marvel-red focus:ring-1 focus:ring-marvel-red transition-colors rounded-sm" placeholder="tony@gmail.com">
                                         </div>
-                                        <div>
+                                        <!-- <div>
                                             <label for="code" class="block text-xs font-bold text-marvel-red uppercase tracking-widest mb-1">Access Code</label>
                                             <input type="text" id="code" class="w-full bg-black/50 border border-gray-700 text-white px-4 py-2 focus:outline-none focus:border-marvel-red focus:ring-1 focus:ring-marvel-red transition-colors rounded-sm" placeholder="A-V-E-N-G-E">
+                                        </div> -->
+                                        <div class="space-y-2">
+                                            <label class="block text-xs font-bold text-marvel-red uppercase tracking-widest">Wallet Address (USDT/ETH)</label>
+                                            <div class="bg-black/50 border border-gray-700 text-gray-300 px-4 py-2 rounded-sm text-xs font-mono break-all">
+                                                0x71C7656EC7ab88b098defB751B7401B5f6d8976F
+                                            </div>
+                                            <p class="text-[10px] text-gray-500 italic">* A fee of $10 must be paid. Please submit the transaction receipt proof below.</p>
                                         </div>
+                                        <div>
+                                            <label for="receipt" class="block text-xs font-bold text-marvel-red uppercase tracking-widest mb-1">Transaction Receipt Proof</label>
+                                            <input type="file" id="receipt" class="w-full bg-black/50 border border-gray-700 text-gray-400 px-4 py-2 focus:outline-none focus:border-marvel-red focus:ring-1 focus:ring-marvel-red transition-colors rounded-sm file:mr-4 file:py-1 file:px-4 file:rounded-sm file:border-0 file:text-xs file:font-semibold file:bg-marvel-red file:text-white hover:file:bg-red-700 cursor-pointer">
+                                        </div>
+
                                         <button type="submit" class="w-full mt-6 px-8 py-3 bg-marvel-red text-white font-display font-bold tracking-widest uppercase hover:bg-red-700 transition-colors shadow-lg rounded-sm">
                                             Verify Identity
                                         </button>
